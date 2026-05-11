@@ -25,17 +25,7 @@ function useFadeUp(delay = 0) {
   };
 }
 
-/* ─── Stat block ────────────────────────────────────────── */
-function StatBlock({ text, delay }: { text: string; delay: number }) {
-  const fu = useFadeUp(delay);
-  return (
-    <div ref={fu.ref} style={fu.style} className="flex flex-col items-center gap-4">
-      <p className="text-on-surface-variant text-lg md:text-xl text-center max-w-lg leading-relaxed">
-        {text}
-      </p>
-    </div>
-  );
-}
+
 
 /* ─── Main section ──────────────────────────────────────── */
 export function CostOfInaction() {
@@ -92,56 +82,6 @@ export function CostOfInaction() {
           </h2>
         </div>
 
-<<<<<<< HEAD
-        {/* Two red lines */}
-        <div ref={lines.ref} style={lines.style} className="flex flex-col gap-2">
-          <p
-            className="text-3xl md:text-4xl font-bold text-primary"
-            style={{ textShadow: '0 0 30px rgba(232,25,44,0.4)' }}
-          >
-            Respuesta inmediata.
-          </p>
-          <p
-            className="text-3xl md:text-4xl font-bold text-primary"
-            style={{ textShadow: '0 0 30px rgba(232,25,44,0.4)' }}
-          >
-            Seguimiento sin rendirse.
-          </p>
-        </div>
-
-        {/* Three stat blocks with red dividers */}
-        <div ref={stats.ref} style={stats.style} className="w-full flex flex-col items-center gap-0">
-
-          <div className="flex flex-col items-center gap-4 py-8 w-full">
-            <p className="text-on-surface-variant text-lg md:text-xl text-center max-w-lg leading-relaxed">
-              El <strong className="text-white">80%</strong> de las ventas inmobiliarias requieren entre{' '}
-              <strong className="text-white">5 y 12 contactos</strong> antes del cierre.
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div
-            className="w-24 h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(232,25,44,0.5), transparent)' }}
-          />
-
-          <div className="flex flex-col items-center gap-4 py-8 w-full">
-            <p className="text-on-surface-variant text-lg md:text-xl text-center max-w-lg leading-relaxed">
-              Más del <strong className="text-white">50% de tus leads</strong> no pasa del primer seguimiento.
-            </p>
-          </div>
-
-          {/* Divider */}
-          <div
-            className="w-24 h-px"
-            style={{ background: 'linear-gradient(90deg, transparent, rgba(232,25,44,0.5), transparent)' }}
-          />
-
-          <div className="flex flex-col items-center gap-4 py-8 w-full">
-            <p className="text-on-surface-variant text-lg md:text-xl text-center max-w-lg leading-relaxed">
-              Tu equipo <strong className="text-white">no responde a tiempo.</strong> Y cuando lo hace,{' '}
-              <strong className="text-white">se rinde demasiado pronto.</strong>
-=======
         {/* Two glass phrases */}
         <div ref={lines.ref} style={lines.style} className="flex flex-col md:flex-row gap-6 justify-center w-full max-w-4xl mx-auto">
           <div className="glass-card px-10 py-5 rounded-2xl border-2 border-primary/20 bg-primary/5 shadow-[0_0_15px_rgba(232,25,44,0.15)]">
@@ -171,44 +111,22 @@ export function CostOfInaction() {
             </div>
             <p className="relative z-10 text-xl text-on-surface-variant font-medium leading-relaxed">
               <span className="text-white font-bold underline decoration-primary underline-offset-4">De las ventas inmobiliarias</span> requieren entre 5 y 12 contactos antes del cierre.
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
             </p>
           </div>
         </div>
 
-<<<<<<< HEAD
-
-
-        {/* Remate */}
-        <div ref={remate.ref} style={remate.style} className="flex flex-col items-center gap-3">
-          <p className="text-white text-xl md:text-2xl font-medium">
-            Acris IA responde en menos de 30 segundos.
-          </p>
-          <p
-            className="text-primary text-xl md:text-2xl font-bold"
-            style={{ textShadow: '0 0 20px rgba(232,25,44,0.35)' }}
-          >
-            Y sigue hasta el contacto 12 si es necesario.
-          </p>
-
-=======
         {/* Remate final */}
         <div ref={remate.ref} style={remate.style} className="mt-6 flex flex-col items-center">
           <p className="text-white text-xl md:text-2xl font-medium max-w-3xl text-center leading-relaxed">
             Acris IA responde en menos de 30 segundos y hace seguimiento perpetuo a los contactos que no están listos para comprar.
           </p>
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
         </div>
 
         {/* CTA Button */}
         <div ref={ctaRef} style={ctaStyle} className="mt-8">
           <button 
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-<<<<<<< HEAD
-            className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_25px_rgba(232,25,44,0.4)] hover:shadow-[0_0_35px_rgba(232,25,44,0.6)]"
-=======
             className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_15px_rgba(232,25,44,0.15)] hover:shadow-[0_0_25px_rgba(232,25,44,0.3)]"
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
           >
             Agenda una asesoría gratis
           </button>

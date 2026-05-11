@@ -8,16 +8,10 @@ import { GlassCard } from '../ui/GlassCard';
 const contactSchema = z.object({
   nombre: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
   empresa: z.string().min(2, 'El nombre de empresa es requerido'),
-<<<<<<< HEAD
-  telefono: z.string().min(8, 'El teléfono no es válido'),
-  email: z.string().email('Debe ser un email válido'),
-  web: z.string().url('Debe ser una URL válida (ej. https://miweb.com)').or(z.literal('')),
-=======
   codigoPais: z.string().min(1, 'Requerido'),
   telefono: z.string().min(8, 'El teléfono no es válido'),
   email: z.string().email('Debe ser un email válido'),
   web: z.string().optional(),
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -25,17 +19,6 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function ContactCTA() {
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-<<<<<<< HEAD
-  });
-
-  const onSubmit = async (data: ContactFormData) => {
-    // Zero Leak Policy: API/Webhook URLs should not be hardcoded. 
-    // Here we simulate the logic.
-    console.log("[Secure Log] Lead captured securely, sanitized:", data);
-    
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1500));
-=======
     defaultValues: { codigoPais: '+52' }
   });
 
@@ -66,7 +49,6 @@ export function ContactCTA() {
       console.error(error);
       alert('Hubo un problema al enviar tus datos. Por favor intenta de nuevo o contáctanos directamente.');
     }
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
   };
 
   return (
@@ -105,15 +87,6 @@ export function ContactCTA() {
               </div>
 
               <div className="space-y-2">
-<<<<<<< HEAD
-                <label className="text-sm font-label uppercase tracking-widest text-on-surface-variant">Celular/Whatsaap</label>
-                <input 
-                  {...register('telefono')}
-                  className="w-full bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-lg p-4 text-white transition-all outline-none" 
-                  placeholder="+52 ..." 
-                  type="tel"
-                />
-=======
                 <label className="text-sm font-label uppercase tracking-widest text-on-surface-variant">Celular/WhatsApp</label>
                 <div className="flex gap-2">
                   <select
@@ -150,7 +123,6 @@ export function ContactCTA() {
                     type="tel"
                   />
                 </div>
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
                 {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono.message}</p>}
               </div>
 

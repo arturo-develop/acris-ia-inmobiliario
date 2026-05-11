@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { GlassCard } from '../ui/GlassCard';
-import { MobileCarousel } from '../ui/MobileCarousel';
+
 
 export function HowItWorks() {
   const [activeStep, setActiveStep] = useState<number>(0);

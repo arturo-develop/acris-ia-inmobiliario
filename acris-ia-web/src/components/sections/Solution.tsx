@@ -50,11 +50,7 @@ export function Solution() {
         <div className="mt-20 text-center">
           <button 
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-<<<<<<< HEAD
-            className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_20px_rgba(232,25,44,0.3)] hover:shadow-[0_0_30px_rgba(232,25,44,0.5)]"
-=======
             className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_15px_rgba(232,25,44,0.15)] hover:shadow-[0_0_25px_rgba(232,25,44,0.3)]"
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
           >
             Agenda una asesoría gratis
           </button>

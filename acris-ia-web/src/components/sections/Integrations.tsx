@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const LOGOS = Array.from({ length: 15 }, (_, i) => `/portales/${i + 1}.png`);
 

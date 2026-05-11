@@ -6,29 +6,17 @@ export function Typewriter({ words }: { words: string[] }) {
   const [loopNum, setLoopNum] = useState(0);
 
   useEffect(() => {
-<<<<<<< HEAD
-    // 20% slower erasing speed
-    let typeSpeed = isDeleting ? 90 : 80;
-=======
     // Sped up by 20%
     let typeSpeed = isDeleting ? 72 : 64;
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
 
     const i = loopNum % words.length;
     const fullText = words[i];
 
     if (!isDeleting && text === fullText) {
-<<<<<<< HEAD
-      // 2 full seconds pause when words are completely typed
-      typeSpeed = 2000;
-    } else if (isDeleting && text === '') {
-      typeSpeed = 500;
-=======
       // 1.6 seconds pause when words are completely typed
       typeSpeed = 1600;
     } else if (isDeleting && text === '') {
       typeSpeed = 400;
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
     }
 
     const timer = setTimeout(() => {

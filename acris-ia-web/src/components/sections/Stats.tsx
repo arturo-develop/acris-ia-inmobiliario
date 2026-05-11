@@ -62,11 +62,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
       {/* Number */}
       <div
         className="whitespace-nowrap text-4xl md:text-6xl lg:text-7xl font-bold text-primary tracking-tight leading-none mb-4"
-<<<<<<< HEAD
-        style={{ textShadow: '0 0 28px rgba(232,25,44,0.4)' }}
-=======
         style={{ textShadow: '0 0 15px rgba(232,25,44,0.2)' }}
->>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
       >
         {stat.numericValue !== null ? (
           <CountUp
