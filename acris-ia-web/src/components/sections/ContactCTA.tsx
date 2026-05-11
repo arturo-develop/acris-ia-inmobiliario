@@ -8,9 +8,16 @@ import { GlassCard } from '../ui/GlassCard';
 const contactSchema = z.object({
   nombre: z.string().min(2, 'El nombre debe tener al menos 2 caracteres'),
   empresa: z.string().min(2, 'El nombre de empresa es requerido'),
+<<<<<<< HEAD
   telefono: z.string().min(8, 'El teléfono no es válido'),
   email: z.string().email('Debe ser un email válido'),
   web: z.string().url('Debe ser una URL válida (ej. https://miweb.com)').or(z.literal('')),
+=======
+  codigoPais: z.string().min(1, 'Requerido'),
+  telefono: z.string().min(8, 'El teléfono no es válido'),
+  email: z.string().email('Debe ser un email válido'),
+  web: z.string().optional(),
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
@@ -18,6 +25,7 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function ContactCTA() {
   const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
+<<<<<<< HEAD
   });
 
   const onSubmit = async (data: ContactFormData) => {
@@ -27,6 +35,38 @@ export function ContactCTA() {
     
     // Simulate network delay
     await new Promise(resolve => setTimeout(resolve, 1500));
+=======
+    defaultValues: { codigoPais: '+52' }
+  });
+
+  const onSubmit = async (data: ContactFormData) => {
+    try {
+      // Zero Leak Policy: Usando variable de entorno para la URL del webhook
+      const webhookUrl = import.meta.env.VITE_GHL_WEBHOOK_URL || 'https://services.leadconnectorhq.com/hooks/dOdKg7lRbJNOawBVXaBc/webhook-trigger/b8b820b7-6786-45c0-971e-ee0a74a03a6c';
+      
+      const payload = {
+        name: data.nombre,
+        email: data.email,
+        phone: `${data.codigoPais}${data.telefono}`,
+        companyName: data.empresa,
+        website: data.web,
+        source: 'Landing Page Acris IA'
+      };
+
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) throw new Error('Error al enviar formulario a GHL');
+      
+      console.log("[Secure Log] Lead enviado a GHL exitosamente");
+    } catch (error) {
+      console.error(error);
+      alert('Hubo un problema al enviar tus datos. Por favor intenta de nuevo o contáctanos directamente.');
+    }
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
   };
 
   return (
@@ -65,6 +105,7 @@ export function ContactCTA() {
               </div>
 
               <div className="space-y-2">
+<<<<<<< HEAD
                 <label className="text-sm font-label uppercase tracking-widest text-on-surface-variant">Celular/Whatsaap</label>
                 <input 
                   {...register('telefono')}
@@ -72,6 +113,44 @@ export function ContactCTA() {
                   placeholder="+52 ..." 
                   type="tel"
                 />
+=======
+                <label className="text-sm font-label uppercase tracking-widest text-on-surface-variant">Celular/WhatsApp</label>
+                <div className="flex gap-2">
+                  <select
+                    {...register('codigoPais')}
+                    className="w-[120px] bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-lg p-4 text-white transition-all outline-none appearance-none cursor-pointer"
+                  >
+                    <option value="+54">🇦🇷 +54</option>
+                    <option value="+591">🇧🇴 +591</option>
+                    <option value="+55">🇧🇷 +55</option>
+                    <option value="+56">🇨🇱 +56</option>
+                    <option value="+57">🇨🇴 +57</option>
+                    <option value="+506">🇨🇷 +506</option>
+                    <option value="+53">🇨🇺 +53</option>
+                    <option value="+593">🇪🇨 +593</option>
+                    <option value="+503">🇸🇻 +503</option>
+                    <option value="+34">🇪🇸 +34</option>
+                    <option value="+1">🇺🇸 +1</option>
+                    <option value="+502">🇬🇹 +502</option>
+                    <option value="+504">🇭🇳 +504</option>
+                    <option value="+52">🇲🇽 +52</option>
+                    <option value="+505">🇳🇮 +505</option>
+                    <option value="+507">🇵🇦 +507</option>
+                    <option value="+595">🇵🇾 +595</option>
+                    <option value="+51">🇵🇪 +51</option>
+                    <option value="+1">🇵🇷 +1</option>
+                    <option value="+1">🇩🇴 +1</option>
+                    <option value="+598">🇺🇾 +598</option>
+                    <option value="+58">🇻🇪 +58</option>
+                  </select>
+                  <input 
+                    {...register('telefono')}
+                    className="flex-1 bg-surface-container-high border-none border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-lg p-4 text-white transition-all outline-none" 
+                    placeholder="Ej. 55 1234 5678" 
+                    type="tel"
+                  />
+                </div>
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
                 {errors.telefono && <p className="text-red-500 text-xs mt-1">{errors.telefono.message}</p>}
               </div>
 

@@ -14,6 +14,7 @@ export function Hero() {
         <div className="absolute inset-0 hero-overlay"></div>
       </div>
       <div className="relative z-10 max-w-5xl text-center space-y-10">
+<<<<<<< HEAD
         <div className="animated-gradient-border">
           <span className="block px-4 py-1 rounded-full bg-surface/90 backdrop-blur-xl text-white text-sm font-medium tracking-widest uppercase">
             Sistema exclusivo de IA para Real Estate
@@ -22,6 +23,27 @@ export function Hero() {
         <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tighter drop-shadow-lg">
           <span className="block text-white">Tu equipo no puede</span>
           <span className="block text-primary min-h-[1.2em] my-1">
+=======
+        {/* Logo Section */}
+        <div className="relative w-full flex justify-center mb-10 md:mb-14">
+          <div className="absolute inset-0 bg-primary/10 blur-[80px] rounded-full scale-110"></div>
+          <img 
+            src="/logo.png" 
+            alt="Acris IA Logo" 
+            className="relative w-64 md:w-80 lg:w-[400px] h-auto object-contain drop-shadow-[0_0_20px_rgba(232,25,44,0.15)] transition-transform duration-700 hover:scale-105" 
+          />
+        </div>
+
+        {/* Pill Badge */}
+        <div className="animated-gradient-border mb-6">
+          <span className="block px-4 py-1.5 rounded-full bg-surface/90 backdrop-blur-xl text-white text-sm font-semibold tracking-widest uppercase">
+            🤖 Sistema integrado de IA + CRM exclusivo para inmobiliarias y constructoras
+          </span>
+        </div>
+        <h1 className="text-[26px] sm:text-4xl md:text-6xl font-bold leading-tight tracking-tighter drop-shadow-lg">
+          <span className="block text-white">Tu equipo no puede</span>
+          <span className="block text-primary min-h-[1.2em] my-1 whitespace-nowrap">
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
             <Typewriter words={['Responder al instante', 'Agendar citas', 'Calificar Leads', 'Hacer seguimiento perpetuo', 'Trabajar 24/7']} />
           </span>
           <span className="block text-white">al mismo tiempo.</span>
@@ -46,7 +68,11 @@ export function Hero() {
           <div className="pt-8">
             <button 
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+<<<<<<< HEAD
               className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_20px_rgba(232,25,44,0.3)] hover:shadow-[0_0_30px_rgba(232,25,44,0.5)]"
+=======
+              className="bg-primary hover:bg-primary-dim text-white px-10 py-4 rounded-xl font-bold text-lg transition-all active:scale-95 shadow-[0_0_15px_rgba(232,25,44,0.15)] hover:shadow-[0_0_25px_rgba(232,25,44,0.3)]"
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
             >
                Agenda una asesoría gratis
             </button>

@@ -86,6 +86,30 @@ body {
   z-index: -1;
 }
 
+<<<<<<< HEAD
+=======
+.animated-gradient-border-purple {
+  position: relative;
+  display: inline-block;
+  padding: 1px;
+  border-radius: 9999px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.animated-gradient-border-purple::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent 70%, rgba(147,51,234, 0.8) 85%, rgba(79,70,229, 0.4) 100%);
+  animation: rotate 3s linear infinite;
+  z-index: -1;
+}
+
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
 /* Mask overlay for animated border on cards */
 .animated-border-card-overlay {
   position: absolute;
@@ -110,3 +134,15 @@ body {
   background: conic-gradient(from 0deg, transparent 75%, rgba(232,25,44, 0.8) 88%, rgba(179,18,33, 0.4) 100%);
   animation: rotate 5s linear infinite;
 }
+<<<<<<< HEAD
+=======
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 50s linear infinite;
+}
+>>>>>>> 8d4e6b7 (feat: landing page layout improvements and integrations component)
