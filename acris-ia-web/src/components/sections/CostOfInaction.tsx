@@ -37,7 +37,7 @@ export function CostOfInaction() {
   const { ref: ctaRef, style: ctaStyle } = useFadeUp(0.62);
 
   return (
-    <section className="relative overflow-hidden py-36 px-6">
+    <section className="relative overflow-hidden py-12 md:py-36 px-6">
 
       {/* ── Background city image ── */}
       <div className="absolute inset-0 z-0">

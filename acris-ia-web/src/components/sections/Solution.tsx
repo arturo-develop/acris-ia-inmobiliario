@@ -4,7 +4,7 @@ import { MobileCarousel } from '../ui/MobileCarousel';
 
 export function Solution() {
   return (
-    <section className="py-32 px-6 bg-surface-container-low relative z-10">
+    <section className="py-12 md:py-32 px-6 bg-surface-container-low relative z-10">
       <div className="max-w-7xl mx-auto">
         {/* Description card */}
         <div className="mb-16 max-w-4xl mx-auto">

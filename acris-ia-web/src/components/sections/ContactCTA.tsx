@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { GlassCard } from '../ui/GlassCard';
+import { useEffect, useState } from 'react';
 
 // Antigravity Security standard: Strict Zod schema for input validation
 const contactSchema = z.object({
@@ -16,11 +17,39 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
+// Mapeo de códigos ISO de país a códigos telefónicos
+const COUNTRY_PHONE_CODES: Record<string, string> = {
+  AR: '+54', BO: '+591', BR: '+55', CL: '+56', CO: '+57',
+  CR: '+506', CU: '+53', EC: '+593', SV: '+503', ES: '+34',
+  US: '+1', GT: '+502', HN: '+504', MX: '+52', NI: '+505',
+  PA: '+507', PY: '+595', PE: '+51', PR: '+1', DO: '+1',
+  UY: '+598', VE: '+58'
+};
+
 export function ContactCTA() {
-  const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm<ContactFormData>({
+  const [detectedCountryCode, setDetectedCountryCode] = useState('+52');
+
+  const { register, handleSubmit, setValue, formState: { errors, isSubmitting, isSubmitSuccessful } } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: { codigoPais: '+52' }
+    defaultValues: { codigoPais: detectedCountryCode }
   });
+
+  useEffect(() => {
+    // Detectar país por IP usando ipapi.co
+    fetch('https://ipapi.co/json/')
+      .then(res => res.json())
+      .then(data => {
+        const countryCode = data.country_code;
+        const phoneCode = COUNTRY_PHONE_CODES[countryCode] || '+52';
+        setDetectedCountryCode(phoneCode);
+        setValue('codigoPais', phoneCode);
+      })
+      .catch(() => {
+        // Si falla, mantener México por defecto
+        setDetectedCountryCode('+52');
+        setValue('codigoPais', '+52');
+      });
+  }, [setValue]);
 
   const onSubmit = async (data: ContactFormData) => {
     try {
@@ -52,7 +81,7 @@ export function ContactCTA() {
   };
 
   return (
-    <section id="contact" className="py-32 px-6 relative">
+    <section id="contact" className="py-12 md:py-32 px-6 relative">
       <div className="absolute inset-0 z-0">
         <img 
           className="w-full h-full object-cover opacity-10" 

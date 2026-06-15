@@ -4,7 +4,7 @@ const LOGOS = Array.from({ length: 15 }, (_, i) => `/portales/${i + 1}.png`);
 
 export function Integrations() {
   return (
-    <section className="py-24 px-6 relative z-10">
+    <section className="py-6 md:py-24 px-6 relative z-10">
       <div className="max-w-6xl mx-auto">
         <div className="bg-white rounded-[2rem] p-10 md:p-14 shadow-[0_0_20px_rgba(232,25,44,0.2)] border border-primary/10 relative overflow-hidden flex flex-col items-center">
           

@@ -4,7 +4,7 @@ import { MobileCarousel } from '../ui/MobileCarousel';
 
 export function ForWho() {
   return (
-    <section className="py-32 px-6 bg-surface-container-low relative z-10">
+    <section className="py-12 md:py-32 px-6 bg-surface-container-low relative z-10">
       <div className="max-w-5xl mx-auto">
         <MobileCarousel desktopGridClass="hidden md:grid md:grid-cols-2 gap-12">
           <GlassCard className="p-12 rounded-3xl border-t-4 border-t-green-500/50 h-full">
