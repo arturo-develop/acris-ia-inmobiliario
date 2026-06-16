@@ -2,6 +2,7 @@
 import { GlassCard } from '../ui/GlassCard';
 import { Typewriter } from '../ui/Typewriter';
 import { useEffect, useRef, useState } from 'react';
+import { CountUp } from '../ui/CountUp';
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 interface ChatMessage {
@@ -10,6 +11,71 @@ interface ChatMessage {
   image?: string;
   imageCaption?: string;
   delay: number;
+}
+
+// ── Stats Column Component ────────────────────────────────────────────────────
+function StatsColumn() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setVisible(true);
+  }, []);
+
+  const stats = [
+    { value: 100, suffix: '%', label: 'Leads atendidos' },
+    { value: 4, suffix: 'x', label: 'Visitas agendadas' },
+    { value: 30, prefix: '< ', suffix: 'seg', label: 'en tiempo de respuesta' },
+  ];
+
+  return (
+    <div className="relative overflow-hidden border-y border-white/5">
+      {/* Subtle red ambient glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'radial-gradient(ellipse 60% 100% at 50% 50%, rgba(232,25,44,0.04) 0%, transparent 70%)',
+        }}
+      />
+
+      {/* Glass-tinted backdrop */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'rgba(13,13,13,0.85)', backdropFilter: 'blur(2px)' }}
+      />
+
+      <div className="relative z-10 divide-y divide-white/5">
+        {stats.map((stat, index) => (
+          <div
+            key={stat.label}
+            className="flex flex-col items-center text-center px-8 py-10"
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? 'translateY(0)' : 'translateY(20px)',
+              transition: `opacity 0.6s ease ${index * 0.15}s, transform 0.6s ease ${index * 0.15}s`,
+            }}
+          >
+            {/* Number */}
+            <div
+              className="whitespace-nowrap text-5xl md:text-6xl lg:text-7xl font-bold text-primary tracking-tight leading-none mb-4"
+              style={{ textShadow: '0 0 15px rgba(232,25,44,0.2)' }}
+            >
+              <CountUp
+                end={stat.value}
+                prefix={stat.prefix ?? ''}
+                suffix={stat.suffix ?? ''}
+                duration={3500}
+              />
+            </div>
+
+            {/* Label */}
+            <p className="text-xs md:text-sm font-label uppercase tracking-widest text-on-surface-variant leading-relaxed">
+              {stat.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 // ── Chat simulation data ──────────────────────────────────────────────────────
@@ -94,7 +160,7 @@ function WhatsAppChat() {
           </div>
           <div className="relative">
             <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center overflow-hidden">
-              <img src="/logo.png" alt="Acris IA" className="w-full h-full object-cover" />
+              <img src="/logo-rojo.png" alt="Acris IA" className="w-full h-full object-contain p-1" />
             </div>
           </div>
           <div className="flex-1">
@@ -296,13 +362,33 @@ export function Hero() {
             </button>
           </div>
 
-          {/* ── WhatsApp Chat Simulation ── */}
-          <div className="flex flex-col items-center w-full mt-12 md:mt-16">
-            <p className="text-xs uppercase tracking-[0.2em] text-on-surface-variant mb-3 font-semibold flex items-center justify-center gap-2">
-              <svg viewBox="0 0 24 24" fill="#25D366" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.625-1.476A11.929 11.929 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.596-5.926-1.632l-.425-.249-3.238 1.034 1.055-3.14-.277-.44A9.774 9.774 0 012.182 12c0-5.423 4.395-9.818 9.818-9.818S21.818 6.577 21.818 12s-4.395 9.818-9.818 9.818z"/></svg>
-              Conversación real · Acris IA en acción
-            </p>
-            <WhatsAppChat />
+          {/* ── Desktop: Stats + WhatsApp in 2 columns | Mobile: Stack ── */}
+          <div className="mt-12 md:mt-16">
+            {/* Mobile: Label + Chat stacked */}
+            <div className="md:hidden flex flex-col items-center w-full">
+              <p className="text-xs uppercase tracking-[0.2em] text-on-surface-variant mb-3 font-semibold flex items-center justify-center gap-2">
+                <svg viewBox="0 0 24 24" fill="#25D366" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.625-1.476A11.929 11.929 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.596-5.926-1.632l-.425-.249-3.238 1.034 1.055-3.14-.277-.44A9.774 9.774 0 012.182 12c0-5.423 4.395-9.818 9.818-9.818S21.818 6.577 21.818 12s-4.395 9.818-9.818 9.818z"/></svg>
+                Conversación real · Acris IA en acción
+              </p>
+              <WhatsAppChat />
+            </div>
+
+            {/* Desktop: Stats (left) + Chat (right) in 2 columns */}
+            <div className="hidden md:grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+              {/* Left Column: Stats */}
+              <div className="flex flex-col justify-center">
+                <StatsColumn />
+              </div>
+
+              {/* Right Column: WhatsApp Chat */}
+              <div className="flex flex-col items-center justify-center">
+                <p className="text-xs uppercase tracking-[0.2em] text-on-surface-variant mb-3 font-semibold flex items-center justify-center gap-2">
+                  <svg viewBox="0 0 24 24" fill="#25D366" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492l4.625-1.476A11.929 11.929 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818c-2.168 0-4.19-.596-5.926-1.632l-.425-.249-3.238 1.034 1.055-3.14-.277-.44A9.774 9.774 0 012.182 12c0-5.423 4.395-9.818 9.818-9.818S21.818 6.577 21.818 12s-4.395 9.818-9.818 9.818z"/></svg>
+                  Conversación real · Acris IA en acción
+                </p>
+                <WhatsAppChat />
+              </div>
+            </div>
           </div>
 
         </div>

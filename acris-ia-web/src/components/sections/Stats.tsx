@@ -86,7 +86,7 @@ function StatCard({ stat, index }: { stat: Stat; index: number }) {
 
 export function Stats() {
   return (
-    <section className="relative py-0 border-y border-white/5 overflow-hidden">
+    <section className="relative py-0 border-y border-white/5 overflow-hidden md:hidden">
       {/* Subtle red ambient glow */}
       <div
         className="absolute inset-0 pointer-events-none"

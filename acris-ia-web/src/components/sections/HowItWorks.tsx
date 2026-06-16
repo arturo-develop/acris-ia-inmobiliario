@@ -143,19 +143,29 @@ export function HowItWorks() {
     <section ref={sectionRef} className="py-12 md:py-32 px-6 overflow-hidden relative z-10">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl md:text-5xl font-bold mb-12 text-center">Cómo transformamos tu proceso.</h2>
-        <div className="relative border-l-2 border-primary/20 ml-4 space-y-12 pb-8">
-          {steps.map((step, index) => (
+        <div className="relative ml-4">
+          <div className="space-y-12">
+            {/* Línea vertical que conecta del primer al último punto */}
             <div
-              key={index}
-              className={`relative pl-12 py-2 transition-all duration-300 cursor-pointer ${activeStep === index ? 'scale-105 transform origin-left' : 'opacity-60 hover:opacity-100'}`}
-              onMouseEnter={() => setActiveStep(index)}
-              onClick={() => setActiveStep(index)}
-            >
-              <div className={`absolute -left-[11px] top-1/2 -translate-y-1/2 w-5 h-5 rounded-full border-2 transition-all duration-300 ${activeStep === index ? 'bg-primary ring-4 ring-primary/20 border-primary scale-125' : 'bg-surface border-primary'}`}></div>
-              <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
-              <p className="text-on-surface-variant leading-relaxed">{step.text}</p>
-            </div>
-          ))}
+              className="absolute left-0 w-0.5 bg-primary/20"
+              style={{
+                top: 'calc(0.5rem + 0.25rem)',
+                height: 'calc(100% - 1rem)',
+              }}
+            />
+            {steps.map((step, index) => (
+              <div
+                key={index}
+                className={`relative pl-12 py-2 transition-all duration-300 cursor-pointer ${activeStep === index ? 'scale-105 transform origin-left' : 'opacity-60 hover:opacity-100'}`}
+                onMouseEnter={() => setActiveStep(index)}
+                onClick={() => setActiveStep(index)}
+              >
+                <div className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-[11px] w-5 h-5 rounded-full border-2 transition-all duration-300 ${activeStep === index ? 'bg-primary ring-4 ring-primary/20 border-primary scale-125' : 'bg-surface border-primary'}`}></div>
+                <h4 className="text-xl font-bold text-white mb-2">{step.title}</h4>
+                <p className="text-on-surface-variant leading-relaxed">{step.text}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
